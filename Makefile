@@ -23,6 +23,8 @@ BINARY = $(BUILDDIR)/$(NAME)
 SOURCES = $(wildcard $(SOURCEDIR)/*.cpp)
 OBJECTS = $(patsubst $(SOURCEDIR)/%.cpp, $(BUILDDIR)/%.o, $(SOURCES))
 
+INCLUDE = -I$(HEADERDIR)
+
 all: $(BINARY)
 
 
@@ -43,12 +45,12 @@ shared:
 
 main:
 	@echo "Building main"
-	$(CC) $(CPPFLAGS) $(LDFLAGS) main.cpp -o $(BINARY) -L./$(BUILDDIR) -lcmparser -Wl,-rpath=./$(BUILDDIR)
+	$(CC) $(CPPFLAGS) $(LDFLAGS) $(INCLUDE) main.cpp -o $(BINARY) -L./$(BUILDDIR) ./build/libcmparser.a
 
 $(BUILDDIR)/%.o: $(SOURCEDIR)/%.cpp
 #	@echo "Building libs"
 #	@echo $< $@
-	$(CC) $(CPPFLAGS) $(LDFLAGS) -c $< -o $@
+	$(CC) $(CPPFLAGS) $(LDFLAGS) $(INCLUDE) -c $< -o $@
 
 clean:
 	$(RM) -rf $(OBJECTS)
