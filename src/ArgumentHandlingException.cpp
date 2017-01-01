@@ -1,33 +1,49 @@
 #include "ArgumentHandlingException.h"
 
-ArgumentException::ArgumentException(const std::string& message):m_errMsg(message){
-
-}
-
-ArgumentException::~ArgumentException() throw() {
-
-}
-
-int ArgumentException::errNumber() const {
-	return m_errNum;
-}
-
-const char* ArgumentException::what() const throw() {
-	return m_errMsg.c_str();
-}
-
 ArgumentWrongOption::ArgumentWrongOption(const std::string& message):ArgumentException(message) {
-	m_errNum = 1001;
+	m_errId = 1001;
 }
 
 ArgumentWrongOption::~ArgumentWrongOption() throw () {
 
 }
-int ArgumentWrongOption::errNumber() const{
-	return m_errNum;
+
+int ArgumentWrongOption::errId() const {
+	return m_errId;
 }
 
 const char* ArgumentWrongOption::what() const throw () {
 	return m_errMsg.c_str();
 }
 
+ArgumentMissingValue::ArgumentMissingValue(const std::string& message):ArgumentException(message) {
+	m_errId = 1002;
+}
+
+ArgumentMissingValue::~ArgumentMissingValue() throw () {
+
+}
+
+int ArgumentMissingValue::errId() const {
+	return m_errId;
+}
+
+const char* ArgumentMissingValue::what() const throw () {
+	return m_errMsg.c_str();
+}
+
+ArgumentExpectedOption::ArgumentExpectedOption(const std::string& message):ArgumentException(message) {
+	m_errId = 1003;
+}
+
+ArgumentExpectedOption::~ArgumentExpectedOption() throw () {
+
+}
+
+int ArgumentExpectedOption::errId() const {
+	return m_errId;
+}
+
+const char* ArgumentExpectedOption::what() const throw() {
+	return m_errMsg.c_str();
+}
