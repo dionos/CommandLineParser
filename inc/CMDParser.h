@@ -13,7 +13,7 @@ public:
 private:
 	bool isLongOption();
 	bool isMultiShortOption();
-	bool isLongOptionOneDesh();
+	bool isLongOptionOneDash();
 	bool isShortOption();
 };
 
