@@ -12,9 +12,9 @@ Options::Options() {
 Options::~Options() {
 	std::cout << "Destructor"<<std::endl;
 	std::set<Option*>::iterator it_options = m_definedOptions.begin();
-//	for(;it_options != m_definedOptions.end(); ++it_options){
-//		delete *it_options;
-//	}
+	for(;it_options != m_definedOptions.end(); ++it_options){
+		delete *it_options;
+	}
 }
 
 Options &Options::getInstance() {
