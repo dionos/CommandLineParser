@@ -13,6 +13,10 @@ public:
 
 public:
 	void addOption(Option *opt);
+	/*
+		check is option defined. input can be short or long option name.
+	*/
+	bool isOptionDefined(const std::string &option);
 //test functions
 	void printDefinedOption();
 

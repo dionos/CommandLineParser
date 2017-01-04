@@ -12,9 +12,9 @@ Options::Options() {
 Options::~Options() {
 	std::cout << "Destructor"<<std::endl;
 	std::set<Option*>::iterator it_options = m_definedOptions.begin();
-	for(;it_options != m_definedOptions.end(); ++it_options){
-		delete *it_options;
-	}
+//	for(;it_options != m_definedOptions.end(); ++it_options){
+//		delete *it_options;
+//	}
 }
 
 Options &Options::getInstance() {
@@ -24,6 +24,18 @@ Options &Options::getInstance() {
 
 void Options::addOption(Option *opt) {
 	m_definedOptions.insert(opt);
+}
+
+bool Options::isOptionDefined(const std::string &optionName) {
+	std::set<Option*>::iterator it_option = m_definedOptions.begin();
+	bool foundOption = false;
+	for (; it_option != m_definedOptions.end(); ++it_option){
+		if (((*it_option)->getShortOption() == optionName) || ((*it_option)->getLongOption() == optionName)){
+			foundOption = true;
+			break;
+		}
+	}
+	return foundOption;
 }
 
 // test functions
