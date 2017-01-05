@@ -13,14 +13,18 @@ typedef enum {
 	coma_stringOption = 7
 }OptionType;
 
+class Options;
+
 class Option {
+friend class Options;
+friend struct std::less<Option*>;
 public:
 	Option(const std::string &shortOption, const std::string &longOption, OptionType type, const std::string &description);
 	virtual ~Option();
 public:
 	void changeDescription(const std::string &newDescription); //Use for chenging --help and --version
 
-public:
+protected:
 	std::string getShortOption() const;
 	std::string getLongOption() const;
 	OptionType getOptionType() const;
@@ -36,7 +40,7 @@ namespace std{
 template <>
 struct less<Option*> {
 	bool operator() (const Option *opt1, const Option *opt2){
-		if ((opt1->getShortOption() < opt2->getShortOption()) && (opt1->getLongOption() < opt2->getLongOption()))
+		if ((opt1->m_shortOption < opt2->m_shortOption) && (opt1->m_longOption < opt2->m_longOption))
 			return true;
 		return false;
 	}
