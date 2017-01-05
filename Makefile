@@ -9,7 +9,7 @@ RM = rm
 
 CPPFLAGS = -Wall -fPIC
 LDFLAGS = 
-ARFLAGS = -cvq
+ARFLAGS = rcs
 
 BUILDDIR = build
 SOURCEDIR = src
