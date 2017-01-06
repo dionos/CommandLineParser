@@ -5,8 +5,8 @@
 Options::Options() {
 	std::cout << "Constructor"<<std::endl;
 	m_definedOptions.clear();
-	m_definedOptions.insert(new Option("-h", "--help", boolOption, ""));
-	m_definedOptions.insert(new Option("-v", "--version", boolOption, ""));
+	m_definedOptions.insert(new Option("-h", "--help", boolOption, "", 1));
+	m_definedOptions.insert(new Option("-v", "--version", boolOption, "", 1));
 }
 
 Options::~Options() {
@@ -36,6 +36,20 @@ bool Options::isOptionDefined(const std::string &optionName) {
 		}
 	}
 	return foundOption;
+}
+
+void Options::changePredefinedDescription(const std::string &option, const std::string &description) {
+	// Check if input parameter is short or long option
+	if ((option != "-h") && (option != "--help") && (option != "-v") && (option != "--version")){
+		return;
+	}
+	std::set<Option*>::iterator it_option = m_definedOptions.begin();
+	for(; it_option != m_definedOptions.end(); ++it_option){
+		if((option == (*it_option)->getShortOption()) || (option == (*it_option)->getLongOption())) {
+			(*it_option)->changeDescription(description);
+			return;
+		}
+	}
 }
 
 // test functions
