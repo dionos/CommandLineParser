@@ -38,6 +38,20 @@ bool Options::isOptionDefined(const std::string &optionName) {
 	return foundOption;
 }
 
+void Options::changePredefinedDescription(const std::string &option, const std::string &description) {
+	// Check if input parameter is short or long option
+	if ((option != "-h") && (option != "--help") && (option != "-v") && (option != "--version")){
+		return;
+	}
+	std::set<Option*>::iterator it_option = m_definedOptions.begin();
+	for(; it_option != m_definedOptions.end(); ++it_option){
+		if((option == (*it_option)->getShortOption()) || (option == (*it_option)->getLongOption())) {
+			(*it_option)->changeDescription(description);
+			return;
+		}
+	}
+}
+
 // test functions
 void Options::printDefinedOption() {
 	std::set<Option*>::iterator it_options = m_definedOptions.begin();
