@@ -9,9 +9,10 @@ public:
 	virtual ~ProcessiongValue() {};
 
 public:
-//	template <class T> void setValue(const T& val);
 	template <class T> void print_vals();
-	template <class T> void setValue(const T& val);
+	template <class T> void pushValue(const T& val);
+	template <class T> T popValue();
+	template <class T> std::list<T> getValues() const;
 
 };
 
@@ -22,10 +23,10 @@ public:
 	virtual ~OptionValue();
 
 public:
-	void setValue(const T& val);
-
 	void print_vals();
-
+	void pushValue(const T& val);
+	T popValue();
+	std::list<T> getValues() const;
 
 private:
 	std::list<T> m_value;
